@@ -27,7 +27,6 @@ import {
 import 'cesium/Build/Cesium/Widgets/widgets.css'
 
 onMounted(() => {
-  // 设置 Cesium Ion 访问令牌
   Ion.defaultAccessToken =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI1MDEzOTlkMS02NGNkLTQyNDYtOWU2YS03ZGFhZTFmMThhZGEiLCJpZCI6MzEwNzc4LCJpYXQiOjE3NDk1MzMzNzN9.PUNeA9lTn8QkCnriv1uIpbYR8PEwGCcVhSblWHLlegA'
 
@@ -42,7 +41,6 @@ onMounted(() => {
     vrButton: false, // 移除 VR 按钮
   })
 
-  // ==================== 波纹扩散效果====================
   // 创建波纹扩散函数
   function createRippleEffect(
     viewer: Viewer,
@@ -106,15 +104,13 @@ onMounted(() => {
     )
   }
 
-  // 添加波纹效果
-  // 波纹  - 青色
-  createRippleEffect(viewer, 126.5382, 45.8036, 100000, 'rgba(0, 255, 255, 0.8)', 0.2)
+  createRippleEffect(viewer, 121.65, 29.89, 100, 'rgba(0, 255, 255, 0.8)', 0.2)
 
   // 为波纹中心添加标注点和标签
   viewer.entities.add({
-    id: 'ripple-center-1',
+    id: 'ripple-center',
     name: '波纹中心',
-    position: Cartesian3.fromDegrees(126.5382, 45.8036),
+    position: Cartesian3.fromDegrees(121.65, 29.89),
     point: new PointGraphics({
       pixelSize: 8,
       color: Color.CYAN,
@@ -136,16 +132,16 @@ onMounted(() => {
   })
 
   // ==================== 设置相机视角 ====================
-  viewer.camera.setView({
-    destination: Cartesian3.fromDegrees(116, 30, 3000000),
-    orientation: {
-      heading: 0.0,
-      pitch: -0.99,
-      roll: 0.0,
-    },
-  })
+  // viewer.camera.setView({
+  //   destination: Cartesian3.fromDegrees(116, 30, 3000000),
+  //   orientation: {
+  //     heading: 0.0,
+  //     pitch: -0.99,
+  //     roll: 0.0,
+  //   },
+  // })
   // 使用 flyTo 方法，自动计算最佳视角
-  viewer.flyTo(viewer.entities)
+  // viewer.flyTo(viewer.entities)
 
   // ==================== 点击事件处理 ====================
 
@@ -156,26 +152,22 @@ onMounted(() => {
     if (defined(pickedObject) && defined(pickedObject.id)) {
       console.log('点击的动画标注:', pickedObject.id.name || pickedObject.id.id)
 
-      // 可以在这里添加点击后的交互效果
       if (pickedObject.id.name) {
         alert(`点击了: ${pickedObject.id.name}`)
       }
     }
   }, ScreenSpaceEventType.LEFT_CLICK)
 
-  // 在控制台输出提示信息
   console.log('标注动画示例已加载！')
   console.log('可以使用 pauseAnimations() 和 resumeAnimations() 来控制动画')
 })
 </script>
 
 <style>
-/* 隐藏页面底部的 Cesium logo 和数据归属 */
 .cesium-viewer .cesium-widget-credits {
   display: none !important;
 }
 
-/* 隐藏右上角的 Imagery 和 Navigation instructions */
 .cesium-viewer .cesium-viewer-toolbar {
   display: none !important;
 }
