@@ -5,7 +5,7 @@
 </template>
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import droneSvg from '@/assets/icon.svg'
+import droneSvg from '@/assets/images/icon.svg'
 import { Canvg } from 'canvg'
 
 type breathCircle = {
@@ -147,7 +147,7 @@ onMounted(async () => {
 <style scoped>
 .shade-root {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background: black;
   display: flex;
   align-items: center;
